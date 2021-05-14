@@ -7,62 +7,48 @@ public class Test {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
-		
-		StringBuilder lastLine = new StringBuilder();
-		StringBuilder currentLine = new StringBuilder();
-
-		int input = 0;
-		char num = '\0'; 
-		char count = '1';
-		int indexForNum = 0;
+		int deps = 0;
 		
 		System.out.println("최대 Deps를 지정하세요.(0, 음수 제외)");		
-		input = sc.nextInt();
+		deps = sc.nextInt();
+		sc.close();
+
+		StringBuilder pastDepsLine = new StringBuilder();
+		StringBuilder currentDepsLine = new StringBuilder();
+		StringBuilder sameNumber = new StringBuilder();
 		
-		System.out.println(input);
+		char identify = '\0';
 		
-		lastLine.append("1");
-		
-		if(input > 0) {
-			for(int depsCount = 0; depsCount < input; depsCount++) {
-				if(lastLine.length() > 1) {
-					for(int lastLineCount = 0; lastLineCount < lastLine.length(); lastLineCount++) {
-						if(lastLine.charAt(lastLineCount) == lastLine.charAt(lastLineCount + 1)) {
+		if(deps > 0) {
+			for(int cycle = 0; cycle < deps; cycle++) {
+				if(cycle == 0) {
+					identify = '1';
+					currentDepsLine.append(identify);
+				} else {
+					for(int LDL = 0; LDL < pastDepsLine.length(); LDL++) { // Line Detail Loop
+						sameNumber.setLength(0);
+						
+						if(LDL == 0) {
+							identify = '1';
+							currentDepsLine.append(identify);
+							sameNumber.append(pastDepsLine.charAt(LDL));
+						} else if(sameNumber.charAt(0) == pastDepsLine.charAt(LDL)) {
+							sameNumber.append(pastDepsLine.charAt(LDL));
+						} else {
 							
-							num = lastLine.charAt(indexForNum);
-							count++;
-							indexForNum++;
-							lastLineCount++;
 						}
 						
-						currentLine.append(num);
-						currentLine.append(count);
+						currentDepsLine.append(sameNumber.length());
 					}
-				} else {
-					lastLine.append("1");
 				}
-					
-				System.out.println(depsCount + 1 + " : " + currentLine);
+		
+				System.out.println(currentDepsLine);
 				
-				lastLine.setLength(0);
-				lastLine.append(currentLine);
-				currentLine.setLength(0);
-			}			
+				pastDepsLine.setLength(0);
+				pastDepsLine.append(currentDepsLine);
+				currentDepsLine.setLength(0);
+				
+			}
 		}
-	
-		sc.close();
 	}
-
-	
-//	do {
-//	count++;
-//	indexForNum++;
-//	lastLineCount++;
-//} while(lastLine.charAt(lastLineCount) == lastLine.charAt(lastLineCount + 1));
-
-//if(lastLine.charAt(lastLineCount) == lastLine.charAt(lastLineCount + 1)) {
-//	count++;
-//} else {
-//	indexForNum++;
-//}
 }
