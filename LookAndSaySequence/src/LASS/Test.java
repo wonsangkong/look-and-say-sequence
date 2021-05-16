@@ -6,10 +6,51 @@ public class Test {
 	
 	public static void main(String[] args) {
 		
+		/**
+		
+		Look And Say Sequence Coding Test 
+
+		1
+		11
+		12
+		1121
+		122111
+		112213
+		12221131
+		1123123111
+		12213111213113
+		11221131132111311231
+		12221231123121133112213111 너무 많다..
+		.
+		.
+		.
+
+		[해결 순서]
+
+		1. First Cycle에서 1을 출력한다.
+		
+		2. Second Cycle부터 Last DEPS의 수열들을 불러와 읽는다.
+		
+		3. 기본으로 가지는 숫자를 담 변수를 identify, 중복되는 숫자를 담는 변수를 sameNumber로 한다.
+		
+		4. 반복문의 i가 0일 경우 identify에 Last DEPS의 index(0)를 담는다.(1은 첫 번째에 append 되어야 한다.)
+		   > Current DEPS에 identify를 append.
+		   
+		   반복문 두 번째부터 - Last DEPS의 현재 index(i) 값이 다음 index(i+1) 값과 동일하면 sameNumber에 아무거나 append,
+		                   동일하지 않으면 sameNumber의 length+1을 해준 뒤(값이 동일하지 않을 경우 sameNumber.length()이기 때문.)
+		                   Current DEPS에 sameNumber.length()를 append해준다. 후 identify에 index(i)를 append해준다.
+		
+		5. DEPS Cycle의 가장 마지막에 Current DEPS를 출력, 후 identify, sameNumber, Current DEPS 초기화한다.
+		   Last DEPS 초기화 후 Current DEPS를 Last DEPS에 append한 후 초기화한다.
+		   
+		
+		*/
+		
+		
 		Scanner sc = new Scanner(System.in);
 		int deps = 0;
 		
-		System.out.println("최대 Deps를 지정하세요.(0, 음수 제외)");		
+		System.out.println("deps 크기를 지정해주세요.(0 이하의 숫자 제외)");		
 		deps = sc.nextInt();
 		sc.close();
 
