@@ -46,7 +46,7 @@ public class Test {
 		
 		*/
 		
-		
+		// DEPS 길이를 사용자로부터 받아온다.
 		Scanner sc = new Scanner(System.in);
 		int deps = 0;
 		
@@ -54,42 +54,97 @@ public class Test {
 		deps = sc.nextInt();
 		sc.close();
 
-		StringBuilder pastDepsLine = new StringBuilder();
+		StringBuilder lastDepsLine = new StringBuilder();
 		StringBuilder currentDepsLine = new StringBuilder();
 		StringBuilder sameNumber = new StringBuilder();
 		
 		char identify = '\0';
 		
-		if(deps > 0) {
-			for(int cycle = 0; cycle < deps; cycle++) {
-				if(cycle == 0) {
-					identify = '1';
-					currentDepsLine.append(identify);
-				} else {
-					for(int LDL = 0; LDL < pastDepsLine.length(); LDL++) { // Line Detail Loop
-						sameNumber.setLength(0);
-						
-						if(LDL == 0) {
-							identify = '1';
-							currentDepsLine.append(identify);
-							sameNumber.append(pastDepsLine.charAt(LDL));
-						} else if(sameNumber.charAt(0) == pastDepsLine.charAt(LDL)) {
-							sameNumber.append(pastDepsLine.charAt(LDL));
-						} else {
-							
-						}
-						
-						currentDepsLine.append(sameNumber.length());
+		for(int cycle = 0; cycle < deps; cycle++) {
+			if(cycle == 0) {
+				currentDepsLine.append('1');
+			}
+			
+			if(cycle == 1) {
+				currentDepsLine.append('1');
+				currentDepsLine.append('1');
+			}
+			
+			if(cycle > 1) {
+				for(int i = 0; i < lastDepsLine.length(); i++) {
+					if(i == 0) {
+						currentDepsLine.append(lastDepsLine.charAt(0));
+					}
+					
+					if(i != 0 && lastDepsLine.charAt(i-1) == lastDepsLine.charAt(i)) {
+						sameNumber.append('s'); // 어차피 length 로 쓸 거라서 append 값은 상관 없음
+					} else {
+						currentDepsLine.append(sameNumber.length()+1);
+						identify = lastDepsLine.charAt(i);
+						currentDepsLine.append(identify);
 					}
 				}
-		
-				System.out.println(currentDepsLine);
-				
-				pastDepsLine.setLength(0);
-				pastDepsLine.append(currentDepsLine);
-				currentDepsLine.setLength(0);
-				
 			}
+			
+			System.out.println(currentDepsLine);
+			
+			lastDepsLine.setLength(0);
+			lastDepsLine.append(currentDepsLine);
+			currentDepsLine.setLength(0);
+			sameNumber.setLength(0);
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		if(deps > 0) {
+//			for(int cycle = 0; cycle < deps; cycle++) {
+//				if(cycle == 0) {
+//					identify = '1';
+//					currentDepsLine.append(identify);
+//				} else {
+//					for(int LDL = 0; LDL < pastDepsLine.length(); LDL++) { // Line Detail Loop
+//						sameNumber.setLength(0);
+//						
+//						if(LDL == 0) {
+//							identify = '1';
+//							currentDepsLine.append(identify);
+//							sameNumber.append(pastDepsLine.charAt(LDL));
+//						} else if(sameNumber.charAt(0) == pastDepsLine.charAt(LDL)) {
+//							sameNumber.append(pastDepsLine.charAt(LDL));
+//						} else {
+//							
+//						}
+//						
+//						currentDepsLine.append(sameNumber.length());
+//					}
+//				}
+//		
+//				System.out.println(currentDepsLine);
+//				
+//				pastDepsLine.setLength(0);
+//				pastDepsLine.append(currentDepsLine);
+//				currentDepsLine.setLength(0);
+//				
+//			}
+//		}
 	}
 }
